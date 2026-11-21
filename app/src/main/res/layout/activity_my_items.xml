@@ -33,6 +33,7 @@
                 android:focusable="true" />
 
             <LinearLayout
+                android:id="@+id/myItemsHeading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -58,6 +59,55 @@
                     android:textSize="12sp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/myItemsSearchBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="0dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/inputSearchMyItems"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_field"
+                    android:hint="@string/rota_search_publication_hint"
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:textColor="@color/rota_navy"
+                    android:textColorHint="@color/rota_gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/actionCloseSearch"
+                    android:layout_width="36dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="5dp"
+                    android:padding="9dp"
+                    android:src="@drawable/ic_rota_close"
+                    android:tint="@color/rota_navy"
+                    android:contentDescription="@string/TextClose"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/actionSearchMyItems"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_rota_search"
+                android:contentDescription="@string/TextSearch"
+                android:clickable="true"
+                android:focusable="true" />
 
         </LinearLayout>
 
@@ -115,552 +165,35 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="false"
-        android:scrollbars="none"
-        android:clipToPadding="false">
+        android:layout_weight="1">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myItemsList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:paddingTop="2dp"
-            android:paddingBottom="16dp">
-
-            <LinearLayout
-                android:id="@+id/mine0Root"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="11dp"
-                android:padding="10dp"
-                android:background="@drawable/bg_card"
-                android:elevation="2dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:id="@+id/mine0Image"
-                    android:layout_width="143dp"
-                    android:layout_height="143dp"
-                    android:background="@drawable/bg_photo_slot"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@null"
-                    tools:src="@drawable/photo_bicycle" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="143dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/mine0Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/rota_navy"
-                        android:textStyle="bold"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        tools:text="Bicicleta en buen estado" />
-
-                    <TextView
-                        android:id="@+id/mine0Status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:paddingStart="9dp"
-                        android:paddingEnd="9dp"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:background="@drawable/bg_pale_green"
-                        android:textSize="11sp"
-                        android:textColor="@color/rota_dark_green"
-                        tools:text="Disponible" />
-
-                    <TextView
-                        android:id="@+id/mine0Description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:textSize="11sp"
-                        android:textColor="@color/rota_gray"
-                        android:maxLines="3"
-                        android:ellipsize="end"
-                        tools:text="Bicicleta todo terreno, funciona muy bien. Solo detalles de uso normales." />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:layout_width="13dp"
-                            android:layout_height="13dp"
-                            android:src="@drawable/ic_rota_pin"
-                            android:tint="@color/rota_gray"
-                            android:contentDescription="@null" />
-
-                        <TextView
-                            android:id="@+id/mine0Location"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="4dp"
-                            android:textSize="10sp"
-                            android:textColor="@color/rota_gray"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            tools:text="Barranca, Puntarenas" />
-
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@drawable/bg_divider" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:src="@drawable/ic_rota_edit"
-                                android:tint="@color/rota_gray"
-                                android:contentDescription="@null" />
-
-                            <TextView
-                                android:id="@+id/mine0Edit"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                android:gravity="center"
-                                android:text="@string/TextEdit"
-                                android:textSize="11sp"
-                                android:textColor="@color/rota_gray"
-                                android:clickable="true"
-                                android:focusable="true" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="16dp"
-                            android:background="@drawable/bg_divider" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:gravity="center">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:src="@drawable/ic_rota_trash"
-                                android:tint="@color/rota_red"
-                                android:contentDescription="@null" />
-
-                            <TextView
-                                android:id="@+id/mine0Delete"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                android:gravity="center"
-                                android:text="@string/TextDelete"
-                                android:textSize="11sp"
-                                android:textColor="@color/rota_red"
-                                android:clickable="true"
-                                android:focusable="true" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mine1Root"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="11dp"
-                android:padding="10dp"
-                android:background="@drawable/bg_card"
-                android:elevation="2dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:id="@+id/mine1Image"
-                    android:layout_width="143dp"
-                    android:layout_height="143dp"
-                    android:background="@drawable/bg_photo_slot"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@null"
-                    tools:src="@drawable/photo_fan" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="143dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/mine1Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/rota_navy"
-                        android:textStyle="bold"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        tools:text="Abanico de pedestal" />
-
-                    <TextView
-                        android:id="@+id/mine1Status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:paddingStart="9dp"
-                        android:paddingEnd="9dp"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:background="@drawable/bg_pale_green"
-                        android:textSize="11sp"
-                        android:textColor="@color/rota_dark_green"
-                        tools:backgroundTint="#FFF0D2"
-                        tools:textColor="#A26712"
-                        tools:text="Reservado" />
-
-                    <TextView
-                        android:id="@+id/mine1Description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:textSize="11sp"
-                        android:textColor="@color/rota_gray"
-                        android:maxLines="3"
-                        android:ellipsize="end"
-                        tools:text="Abanico de 3 velocidades, en buen estado. Ideal para la casa o la oficina." />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:layout_width="13dp"
-                            android:layout_height="13dp"
-                            android:src="@drawable/ic_rota_pin"
-                            android:tint="@color/rota_gray"
-                            android:contentDescription="@null" />
-
-                        <TextView
-                            android:id="@+id/mine1Location"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="4dp"
-                            android:textSize="10sp"
-                            android:textColor="@color/rota_gray"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            tools:text="El Roble" />
-
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@drawable/bg_divider" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:src="@drawable/ic_rota_edit"
-                                android:tint="@color/rota_gray"
-                                android:contentDescription="@null" />
-
-                            <TextView
-                                android:id="@+id/mine1Edit"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                android:gravity="center"
-                                android:text="@string/TextEdit"
-                                android:textSize="11sp"
-                                android:textColor="@color/rota_gray"
-                                android:clickable="true"
-                                android:focusable="true" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="16dp"
-                            android:background="@drawable/bg_divider" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:gravity="center">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:src="@drawable/ic_rota_trash"
-                                android:tint="@color/rota_red"
-                                android:contentDescription="@null" />
-
-                            <TextView
-                                android:id="@+id/mine1Delete"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                android:gravity="center"
-                                android:text="@string/TextDelete"
-                                android:textSize="11sp"
-                                android:textColor="@color/rota_red"
-                                android:clickable="true"
-                                android:focusable="true" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mine2Root"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="11dp"
-                android:padding="10dp"
-                android:background="@drawable/bg_card"
-                android:elevation="2dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:id="@+id/mine2Image"
-                    android:layout_width="143dp"
-                    android:layout_height="143dp"
-                    android:background="@drawable/bg_photo_slot"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@null"
-                    tools:src="@drawable/photo_baby" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="143dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/mine2Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/rota_navy"
-                        android:textStyle="bold"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        tools:text="Ropa de bebé" />
-
-                    <TextView
-                        android:id="@+id/mine2Status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:paddingStart="9dp"
-                        android:paddingEnd="9dp"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:background="@drawable/bg_pale_green"
-                        android:textSize="11sp"
-                        android:textColor="@color/rota_dark_green"
-                        tools:text="Disponible" />
-
-                    <TextView
-                        android:id="@+id/mine2Description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:textSize="11sp"
-                        android:textColor="@color/rota_gray"
-                        android:maxLines="3"
-                        android:ellipsize="end"
-                        tools:text="Ropa de bebé de 0 a 6 meses en excelente estado. Varias prendas de distintas marcas." />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:layout_width="13dp"
-                            android:layout_height="13dp"
-                            android:src="@drawable/ic_rota_pin"
-                            android:tint="@color/rota_gray"
-                            android:contentDescription="@null" />
-
-                        <TextView
-                            android:id="@+id/mine2Location"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="4dp"
-                            android:textSize="10sp"
-                            android:textColor="@color/rota_gray"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            tools:text="Chacarita" />
-
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@drawable/bg_divider" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:src="@drawable/ic_rota_edit"
-                                android:tint="@color/rota_gray"
-                                android:contentDescription="@null" />
-
-                            <TextView
-                                android:id="@+id/mine2Edit"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                android:gravity="center"
-                                android:text="@string/TextEdit"
-                                android:textSize="11sp"
-                                android:textColor="@color/rota_gray"
-                                android:clickable="true"
-                                android:focusable="true" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="16dp"
-                            android:background="@drawable/bg_divider" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:gravity="center">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:src="@drawable/ic_rota_trash"
-                                android:tint="@color/rota_red"
-                                android:contentDescription="@null" />
-
-                            <TextView
-                                android:id="@+id/mine2Delete"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                android:gravity="center"
-                                android:text="@string/TextDelete"
-                                android:textSize="11sp"
-                                android:textColor="@color/rota_red"
-                                android:clickable="true"
-                                android:focusable="true" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
+            android:paddingBottom="16dp"
+            android:clipToPadding="false"
+            android:scrollbars="none"
+            tools:listitem="@layout/view_my_item"
+            tools:itemCount="3" />
+
+        <TextView
+            android:id="@+id/myItemsEmptyMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/TextNoItems"
+            android:textColor="@color/rota_gray"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </FrameLayout>
 
 </LinearLayout>

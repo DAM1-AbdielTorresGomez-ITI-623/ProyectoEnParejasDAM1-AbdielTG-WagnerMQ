@@ -23,5 +23,24 @@
         android:textStyle="bold"
         tools:text="@string/TextPublicationCreated" />
 
+    <View
+        android:id="@+id/noticeDivider"
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="14dp"
+        android:background="#DDE3E8"
+        android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/noticeAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:minHeight="38dp"
+        android:gravity="center"
+        android:textColor="@color/rota_navy"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="@string/rota_undo" />
 </LinearLayout>

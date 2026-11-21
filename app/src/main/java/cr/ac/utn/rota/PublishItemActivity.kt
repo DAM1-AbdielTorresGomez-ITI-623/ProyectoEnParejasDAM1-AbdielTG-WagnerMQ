@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import cr.ac.utn.rota.domain.model.Item
 import cr.ac.utn.rota.domain.model.ItemCategory
 import cr.ac.utn.rota.domain.model.ItemStatus
+import cr.ac.utn.rota.util.DialogUtil
 import cr.ac.utn.rota.util.IdUtil
 import cr.ac.utn.rota.util.NoticeUtil
 import cr.ac.utn.rota.viewmodel.ItemValidationException
@@ -29,9 +30,11 @@ class PublishItemActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_ITEM_ID = "item_id"
         private const val SUCCESS_NOTICE_DURATION = 1200L
+        private const val NO_CHANGES_NOTICE_DURATION = 1800L
     }
 
     private val viewModel = ItemViewModel(RotaData.repository)
+    private var editingItem: Item? = null
     private var selectedCategory: ItemCategory? = null
     private var selectedCondition: String? = null
 
@@ -60,6 +63,7 @@ class PublishItemActivity : AppCompatActivity() {
         publishButton = findViewById(R.id.actionPublishItem)
 
         setListeners()
+        loadEditingItem()
     }
 
     private fun setListeners() {
@@ -86,6 +90,26 @@ class PublishItemActivity : AppCompatActivity() {
         watchField(descriptionInput, R.id.errorDescription)
         agreementCheck.setOnCheckedChangeListener { _, checked ->
             if (checked) findViewById<TextView>(R.id.errorAgreement).visibility = View.GONE
+        }
+    }
+
+    private fun loadEditingItem() {
+        val id = intent.getStringExtra(EXTRA_ITEM_ID) ?: return
+        try {
+            val item = viewModel.getMyItemById(id, RotaData.activeUserId)
+            editingItem = item
+            findViewById<TextView>(R.id.headerTitle).setText(R.string.TextEditPublication)
+            publishButton.setText(R.string.TextSaveChanges)
+            titleInput.setText(item.title)
+            descriptionInput.setText(item.description)
+            selectedCategory = item.category
+            categoryInput.setText(ItemUi.categoryLabel(this, item.category))
+            selectedCondition = item.condition
+            conditionInput.setText(ItemUi.conditionLabel(this, item.condition))
+            agreementCheck.visibility = View.GONE
+            findViewById<TextView>(R.id.errorAgreement).visibility = View.GONE
+        } catch (error: ItemValidationException) {
+            showNotice(ItemUi.errorLabel(error.error), NoticeUtil.Type.ERROR, true)
         }
     }
 
@@ -147,19 +171,33 @@ class PublishItemActivity : AppCompatActivity() {
 
     private fun saveItem() {
         if (!isValidData()) return
+        val previous = editingItem
         val item = Item(
-            IdUtil.generateId(),
+            previous?.id ?: IdUtil.generateId(),
             RotaData.activeUserId,
             titleInput.text.toString().trim(),
             descriptionInput.text.toString().trim(),
             selectedCategory!!,
-            ItemStatus.AVAILABLE,
+            previous?.status ?: ItemStatus.AVAILABLE,
             selectedCondition!!,
-            "",
-            emptyList()
+            previous?.generalLocation ?: "",
+            previous?.imageUris ?: emptyList()
         )
-        persistItem(item)
+        if (previous == null) {
+            persistItem(item, false)
+        } else {
+            if (item == previous) {
+                showNotice(R.string.rota_no_changes_made,
+                    durationMillis = NO_CHANGES_NOTICE_DURATION)
+                return
+            }
+            DialogUtil.confirm(this, R.string.rota_save_changes_question,
+                R.string.rota_save_changes_message, R.string.TextSaveChanges) {
+                persistItem(item, true)
+            }
+        }
     }
+
     private fun isValidData(): Boolean {
         if (titleInput.text.toString().trim().isEmpty()) {
             showFieldError(titleInput, R.id.errorItemTitle)
@@ -177,7 +215,7 @@ class PublishItemActivity : AppCompatActivity() {
             showFieldError(descriptionInput, R.id.errorDescription)
             return false
         }
-        if (!agreementCheck.isChecked) {
+        if (editingItem == null && !agreementCheck.isChecked) {
             findViewById<TextView>(R.id.errorAgreement).apply {
                 setText(R.string.rota_invalid_agreement)
                 visibility = View.VISIBLE
@@ -187,17 +225,21 @@ class PublishItemActivity : AppCompatActivity() {
         return true
     }
 
-    private fun persistItem(item: Item) {
+    private fun persistItem(item: Item, edit: Boolean) {
         try {
-            viewModel.createItem(item, RotaData.activeUserId)
+            if (edit) viewModel.updateItem(item, RotaData.activeUserId)
+            else viewModel.createItem(item, RotaData.activeUserId)
+
             publishButton.isEnabled = false
-            showNotice(R.string.TextPublicationCreated, NoticeUtil.Type.SUCCESS, true)
+            showNotice(if (edit) R.string.TextPublicationUpdated
+                else R.string.TextPublicationCreated, NoticeUtil.Type.SUCCESS, true)
         } catch (error: ItemValidationException) {
             showNotice(ItemUi.errorLabel(error.error), NoticeUtil.Type.ERROR)
         } catch (error: Exception) {
             showNotice(R.string.TextSaveError, NoticeUtil.Type.ERROR)
         }
     }
+
     private fun showFieldError(input: EditText, errorId: Int) {
         input.setBackgroundResource(R.drawable.bg_rota_field_error)
         findViewById<TextView>(errorId).apply {

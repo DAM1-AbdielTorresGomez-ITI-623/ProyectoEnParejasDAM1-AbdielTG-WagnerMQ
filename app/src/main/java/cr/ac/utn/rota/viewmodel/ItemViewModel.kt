@@ -43,6 +43,32 @@ class ItemViewModel(private val repository: IItemRepository): ViewModel() {
         repository.addItem(item)
     }
 
+    fun updateItem(item: Item, userId: String) {
+        val saved = getMyItemById(item.id, userId)
+        if (item.donorId != saved.donorId)
+            throw ItemValidationException(ItemError.NOT_OWNER)
+        if (item.status != saved.status)
+            throw ItemValidationException(ItemError.INVALID_STATUS)
+        if (item.imageUris != saved.imageUris)
+            throw ItemValidationException(ItemError.INVALID_DATA)
+        validateItem(item)
+        repository.updateItem(item)
+    }
+
+    fun removeItem(id: String, userId: String) {
+        getMyItemById(id, userId)
+        repository.deleteItem(id)
+    }
+
+    fun restoreItem(item: Item, userId: String) {
+        if (item.donorId != userId)
+            throw ItemValidationException(ItemError.NOT_OWNER)
+        if (repository.getItemById(item.id) != null)
+            throw ItemValidationException(ItemError.DUPLICATE)
+        validateItem(item)
+        repository.addItem(item)
+    }
+
     private fun validateItem(item: Item) {
         if (item.id.isBlank() || item.donorId.isBlank() || item.title.isBlank() ||
             item.description.isBlank() || item.condition.isBlank() ||

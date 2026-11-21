@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rota_delete_publication_message">This publication will be deleted.</string>
+    <string name="rota_delete_publication_notice">Publication deleted</string>
+    <string name="rota_undo">Undo</string>
+    <string name="rota_publication_restored">Publication restored</string>
+    <string name="rota_no_changes_made">No changes were made</string>
+</resources>

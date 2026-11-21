@@ -13,16 +13,18 @@ import java.lang.ref.WeakReference
 object NoticeUtil {
     enum class Type { SUCCESS, ERROR, INFO }
     private const val MESSAGE_DURATION = 3500L
+    private const val UNDO_DURATION = 5000L
     private var currentPopup: PopupWindow? = null
     private var currentActivity: WeakReference<Activity>? = null
     private var currentMessage: Int? = null
     private var currentType: Type? = null
 
     fun show(activity: Activity, message: Int, type: Type = Type.INFO,
+             actionText: Int? = null, onAction: (() -> Unit)? = null,
              hiddenView: View? = null, onDismiss: (() -> Unit)? = null,
              keepHiddenOnDismiss: Boolean = false,
              durationMillis: Long? = null) {
-        if (currentPopup?.isShowing == true &&
+        if (actionText == null && currentPopup?.isShowing == true &&
             currentActivity?.get() === activity && currentMessage == message &&
             currentType == type) return
 
@@ -38,8 +40,20 @@ object NoticeUtil {
         }
         val popup = PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT, false)
+        val action = view.findViewById<TextView>(R.id.noticeAction)
+        val divider = view.findViewById<View>(R.id.noticeDivider)
+        val hasAction = actionText != null && onAction != null
+        if (hasAction) {
+            action.setText(actionText!!)
+            action.visibility = View.VISIBLE
+            divider.visibility = View.VISIBLE
+            action.setOnClickListener {
+                popup.dismiss()
+                onAction?.invoke()
+            }
+        }
         popup.elevation = activity.resources.displayMetrics.density * 5
-        popup.isTouchable = false
+        popup.isTouchable = hasAction
         popup.setOnDismissListener {
             if (currentPopup === popup) {
                 currentPopup = null
@@ -58,6 +72,6 @@ object NoticeUtil {
         popup.showAtLocation(activity.window.decorView, Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL,
             0, (80 * activity.resources.displayMetrics.density).toInt())
         view.postDelayed({ if (popup.isShowing) popup.dismiss() },
-            durationMillis ?: MESSAGE_DURATION)
+            durationMillis ?: if (hasAction) UNDO_DURATION else MESSAGE_DURATION)
     }
 }
