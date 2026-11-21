@@ -26,8 +26,9 @@ class MemoryDataRepository: IRotaRepository {
     }
 
     override fun updateItem(item: Item) {
-        deleteItem(item.id)
-        addItem(item)
+        val index = items.indexOfFirst { it.id == item.id }
+        if (index >= 0)
+            items[index] = item
     }
 
     override fun deleteItem(id: String) {

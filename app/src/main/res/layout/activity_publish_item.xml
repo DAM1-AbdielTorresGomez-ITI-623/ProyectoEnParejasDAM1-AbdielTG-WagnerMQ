@@ -1,6 +1,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/publishRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -71,6 +72,15 @@
                 android:inputType="textCapSentences"
                 android:singleLine="true" />
             <TextView
+                android:id="@+id/errorItemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingStart="4dp"
+                android:textColor="@color/rota_red"
+                android:textSize="11sp"
+                android:visibility="gone" />
+            <TextView
                 android:id="@+id/inputItemCategoryLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,6 +107,15 @@
                 android:drawableEnd="@drawable/ic_rota_chevron_down"
                 android:drawablePadding="8dp" />
             <TextView
+                android:id="@+id/errorCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingStart="4dp"
+                android:textColor="@color/rota_red"
+                android:textSize="11sp"
+                android:visibility="gone" />
+            <TextView
                 android:id="@+id/inputItemConditionLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,6 +141,15 @@
                 android:clickable="true"
                 android:drawableEnd="@drawable/ic_rota_chevron_down"
                 android:drawablePadding="8dp" />
+            <TextView
+                android:id="@+id/errorCondition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingStart="4dp"
+                android:textColor="@color/rota_red"
+                android:textSize="11sp"
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/inputItemDescriptionLabel"
                 android:layout_width="wrap_content"
@@ -162,6 +190,15 @@
                     android:textColor="@color/rota_gray"
                     android:textSize="11sp" />
             </FrameLayout>
+            <TextView
+                android:id="@+id/errorDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingStart="4dp"
+                android:textColor="@color/rota_red"
+                android:textSize="11sp"
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/inputItemAreaLabel"
                 android:layout_width="wrap_content"
@@ -207,7 +244,7 @@
                     android:id="@+id/photoCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="2/3"
+                    tools:text="0/3"
                     android:textSize="12sp"
                     android:textColor="@color/rota_gray" />
             </LinearLayout>
@@ -276,48 +313,28 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginEnd="7dp"
-                    android:background="@drawable/bg_photo_slot"
-                    android:clipToOutline="true">
+                    android:background="@drawable/bg_photo_slot_dashed">
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/photo_bicycle"
-                        android:contentDescription="@string/TextItemPhotos" />
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="top|end"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:background="@drawable/bg_rota_remove_photo"
-                        android:src="@drawable/ic_rota_close"
-                        android:padding="5dp"
-                        android:contentDescription="@string/TextRemovePhoto" />
+                        android:layout_width="31dp"
+                        android:layout_height="31dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_rota_plus_circle"
+                        android:tint="@color/rota_gray"
+                        android:contentDescription="@string/TextPhotoAdd" />
                 </FrameLayout>
                 <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginEnd="7dp"
-                    android:background="@drawable/bg_photo_slot"
-                    android:clipToOutline="true">
+                    android:background="@drawable/bg_photo_slot_dashed">
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/photo_bicycle_gears"
-                        android:contentDescription="@string/TextItemPhotos" />
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="top|end"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:background="@drawable/bg_rota_remove_photo"
-                        android:src="@drawable/ic_rota_close"
-                        android:padding="5dp"
-                        android:contentDescription="@string/TextRemovePhoto" />
+                        android:layout_width="31dp"
+                        android:layout_height="31dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_rota_plus_circle"
+                        android:tint="@color/rota_gray"
+                        android:contentDescription="@string/TextPhotoAdd" />
                 </FrameLayout>
                 <FrameLayout
                     android:layout_width="0dp"
@@ -338,27 +355,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:checked="true"
-                android:buttonTint="@color/rota_green"
+                android:checked="false"
+                android:button="@null"
+                android:drawableStart="@drawable/rota_checkbox_selector"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:minHeight="44dp"
                 android:text="@string/TextAgreedMeetingPoint"
                 android:textSize="12sp"
                 android:textColor="@color/rota_navy" />
+            <TextView
+                android:id="@+id/errorAgreement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:translationY="-5dp"
+                android:layout_marginBottom="3dp"
+                android:paddingStart="30dp"
+                android:textColor="@color/rota_red"
+                android:textSize="11sp"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/actionPublishItem"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_primary"
+                android:gravity="center"
+                android:text="@string/TextPublish"
+                android:textColor="@color/rota_white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
         </LinearLayout>
     </ScrollView>
-    <TextView
-        android:id="@+id/actionPublishItem"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/bg_primary"
-        android:gravity="center"
-        android:text="@string/TextPublish"
-        android:textColor="@color/rota_white"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:clickable="true"
-        android:focusable="true" />
 </LinearLayout>

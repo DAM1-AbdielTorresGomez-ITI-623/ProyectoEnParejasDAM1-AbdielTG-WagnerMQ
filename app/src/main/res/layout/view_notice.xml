@@ -3,33 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minHeight="48dp"
+    android:minHeight="52dp"
+    android:minWidth="204dp"
+    android:background="@drawable/bg_rota_notice"
+    android:gravity="center"
     android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:background="@drawable/bg_pale_green"
     android:paddingStart="16dp"
-    android:paddingTop="11dp"
-    android:paddingEnd="18dp"
-    android:paddingBottom="11dp"
-    android:elevation="5dp">
-
-    <ImageView
-        android:id="@+id/noticeIcon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_rota_check"
-        android:tint="@color/rota_dark_green"
-        android:contentDescription="@null" />
+    android:paddingTop="7dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="7dp">
 
     <TextView
         android:id="@+id/noticeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="280dp"
+        android:maxWidth="270dp"
+        android:textColor="@color/rota_dark_green"
         android:textSize="13sp"
         android:textStyle="bold"
-        android:textColor="@color/rota_dark_green"
-        tools:text="@string/TextRequestSent" />
+        tools:text="@string/TextPublicationCreated" />
+
 
 </LinearLayout>
