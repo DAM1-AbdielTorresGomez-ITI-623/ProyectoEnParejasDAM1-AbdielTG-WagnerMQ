@@ -173,12 +173,12 @@
     <string name="rota_add_photo">Agregá una fotografía.</string>
     <string name="rota_description_limit">Máximo 500 caracteres.</string>
     <string name="rota_photos_counter">%1$d/3</string>
-    <string name="TextNotAvailable">Función no disponible.</string>
+    <string name="TextNotAvailable">Función no disponible</string>
     <string name="TextPhotoLimitReached">Solo podés agregar hasta 3 fotografías.</string>
     <string name="TextCannotRequestOwnItem">No podés solicitar tu propio artículo.</string>
     <string name="TextRequestAlreadySent">Ya enviaste una solicitud por este artículo.</string>
     <string name="TextItemUnavailable">Este artículo ya no está disponible.</string>
-    <string name="TextCompleteRequiredFields">Completá los campos obligatorios.</string>
+    <string name="TextCompleteRequiredFields">Completá los campos obligatorios</string>
 
     <string name="rota_requests_subtitle">Seguí el progreso de cada donación.</string>
     <string name="rota_search_conversation">Buscar conversación</string>
@@ -203,4 +203,13 @@
     <string name="TextMessageRequired">Escribí un mensaje antes de enviarlo.</string>
     <string name="TextMeetingPointUpdated">Punto de entrega actualizado.</string>
     <string name="TextDeliveryConfirmed">Entrega confirmada correctamente.</string>
+    <string name="rota_search_publication">Buscar publicación</string>
+    <string name="rota_search_publication_hint">Escribí el título del artículo</string>
+    <string name="rota_search_select_publication">Seleccioná la publicación</string>
+    <string name="rota_save_changes_question">¿Guardar cambios?</string>
+    <string name="rota_save_changes_message">Se actualizará la información de esta publicación.</string>
+    <string name="rota_item_not_found">No se encontró la publicación</string>
+    <string name="rota_not_owner">Esta publicación no pertenece al usuario actual</string>
+    <string name="rota_invalid_item_status">No se puede cambiar el estado del artículo desde este formulario</string>
+    <string name="rota_description_counter">%1$d/500</string>
 </resources>

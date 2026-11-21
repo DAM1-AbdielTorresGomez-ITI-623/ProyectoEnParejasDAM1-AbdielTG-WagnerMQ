@@ -178,7 +178,7 @@
     <string name="TextCannotRequestOwnItem">You cannot request your own item.</string>
     <string name="TextRequestAlreadySent">You have already sent a request for this item.</string>
     <string name="TextItemUnavailable">This item is no longer available.</string>
-    <string name="TextCompleteRequiredFields">Complete the required fields.</string>
+    <string name="TextCompleteRequiredFields">Complete the required fields</string>
 
     <string name="rota_requests_subtitle">Track the progress of every donation.</string>
     <string name="rota_search_conversation">Search conversation</string>
@@ -203,4 +203,13 @@
     <string name="TextMessageRequired">Write a message before sending it.</string>
     <string name="TextMeetingPointUpdated">Meeting point updated.</string>
     <string name="TextDeliveryConfirmed">Delivery confirmed successfully.</string>
+    <string name="rota_search_publication">Search publication</string>
+    <string name="rota_search_publication_hint">Enter the item title</string>
+    <string name="rota_search_select_publication">Select a publication</string>
+    <string name="rota_save_changes_question">Save changes?</string>
+    <string name="rota_save_changes_message">This publication will be updated.</string>
+    <string name="rota_item_not_found">Publication not found</string>
+    <string name="rota_not_owner">This publication does not belong to the current user</string>
+    <string name="rota_invalid_item_status">Item status cannot be changed in this form</string>
+    <string name="rota_description_counter">%1$d/500</string>
 </resources>
